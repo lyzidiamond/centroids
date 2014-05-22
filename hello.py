@@ -50,5 +50,3 @@ def centroid():
     </p>
   </form></body>
   '''
-
-app.run(debug=True)
