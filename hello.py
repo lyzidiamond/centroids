@@ -13,7 +13,7 @@ app = Flask(__name__)
 def allowed_file(filename):
   return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
-def centroid(polygons_json):
+def get_centroids(polygons_json):
 
   feature_collection = {
     'type': 'FeatureCollection',
@@ -43,7 +43,7 @@ def operation():
       polygons_json = file.read()
       
       strIO = StringIO.StringIO()
-      strIO.write(json.dumps(centroids(polygons_json)))
+      strIO.write(json.dumps(get_centroids(polygons_json)))
       strIO.seek(0)
 
       centroids_filename = file_title + "_centroids.geojson"
