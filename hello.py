@@ -55,7 +55,7 @@ def operation():
   <body>
   <form action="" method=post enctype=multipart/form-data>
     <p><input type=file name=file>
-      <input type=submit value=Upload>
+      <input type=submit value=Make centroids>
     </p>
   </form></body>
   '''
