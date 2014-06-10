@@ -75,7 +75,7 @@ def operation():
       </form>
     </div>
     <div id="footer">
-      <p>This is a Flask application that uses the Shapely Python library. It was made by <a href="http://twitter.com/lyzidiamond>Lyzi Diamond</a>. <a href="http://github.com/lyzidiamond/centroids">It is on GitHub.</a></p>
+      <p>This is a Flask application that uses the Shapely Python library. It was made by <a href="http://twitter.com/lyzidiamond">Lyzi Diamond</a>. <a href="http://github.com/lyzidiamond/centroids">It is on GitHub.</a></p>
     </div>
   </body>
   '''
