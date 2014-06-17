@@ -84,20 +84,20 @@ Should return:
 
 ## Running locally
 
-* Optionally create a [virtual environment](http://docs.python-guide.org/en/latest/dev/virtualenvs/)
+Optionally create a [virtual environment](http://docs.python-guide.org/en/latest/dev/virtualenvs/)
 
 ```
 virtualenv venv
 source venv/bin/activate
 ```
 
-* Install [requirements](https://devcenter.heroku.com/articles/python-pip)
+Install [requirements](https://devcenter.heroku.com/articles/python-pip)
 
 ```
 pip install -r requirements.txt
 ```
 
-* Start the server
+Start the server
 
 ```
 python hello.py
