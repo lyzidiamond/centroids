@@ -79,3 +79,7 @@ def operation():
     </div>
   </body>
   '''
+
+@app.route('/centroids', methods=['POST'])
+def api_centroids():
+  return get_centroids(request.data)
