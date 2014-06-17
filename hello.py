@@ -3,7 +3,7 @@ import json
 import StringIO
 import shapely
 from shapely.geometry import shape, mapping
-from flask import Flask, request, send_file
+from flask import Flask, request, send_file, jsonify
 from werkzeug.utils import secure_filename
 
 ALLOWED_EXTENSIONS = set(['js', 'json', 'geojson'])
