@@ -11,7 +11,7 @@ In the resulting file:
 * Point features do not change.
 * I have no idea how this handles MultiPolygons.
 
-This is a [Flask](http://flask.pocoo.org/) application that uses the [Shapely](https://github.com/Toblerity/Shapely) Python library by @sgillies. Issues and pull requests welcome!
+This is a [Flask](http://flask.pocoo.org/) application that uses the [Shapely](https://github.com/Toblerity/Shapely) Python library by [@sgillies](http://github.com/sgillies). Issues and pull requests welcome!
 
 ## Running locally
 
