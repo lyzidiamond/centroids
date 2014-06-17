@@ -83,3 +83,6 @@ def operation():
 @app.route('/centroids', methods=['POST'])
 def api_centroids():
   return get_centroids(request.data)
+
+if __name__ == '__main__':
+    app.run(debug=True)
