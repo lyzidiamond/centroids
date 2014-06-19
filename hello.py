@@ -27,7 +27,7 @@ def get_centroids(polygons_json):
     feature['geometry'] = centroid
     feature_collection['features'].append(feature)
 
-  return jsonify(feature_collection)
+  return feature_collection
 
 @app.route('/', methods=['GET', 'POST'])
 def operation():
@@ -54,7 +54,7 @@ def operation():
 
 @app.route('/centroids', methods=['POST'])
 def api_centroids():
-  return get_centroids(request.data)
+  return jsonify(get_centroids(request.data))
 
 if __name__ == '__main__':
     app.run(debug=True)
