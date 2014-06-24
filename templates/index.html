@@ -24,6 +24,8 @@
   </div>
   <div id="footer">
     <p>This is a Flask application that uses the <a href="https://pypi.python.org/pypi/Shapely">Shapely</a> Python library. It was made by <a href="http://twitter.com/lyzidiamond">Lyzi Diamond</a>. <a href="http://github.com/lyzidiamond/centroids">It is on GitHub.</a></p>
-    <div id="map"></div>
+    {% if map %}
+      <div id="map"></div>
+    {% endif %}
   </div>
 </body>
