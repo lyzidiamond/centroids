@@ -2,4 +2,5 @@ from os import environ
 
 from hello import app
 
-app.run(port=environ.get('PORT', 5000))
+if __name__ == '__main__':
+	app.run(port=int(environ.get('PORT', 5000)))
