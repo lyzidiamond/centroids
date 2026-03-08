@@ -1,7 +1,9 @@
 services:
   - type: web
+    plan: free
     name: centroids
-    env: python
+    runtime: python
+    repo: https://githu.com/lyzidiamond/centroids.git
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn hello:app
     envVars:
