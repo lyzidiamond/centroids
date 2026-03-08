@@ -1,6 +1,6 @@
 import os
 import json
-import StringIO
+from io import BytesIO
 import shapely
 from shapely.geometry import shape, mapping
 from flask import Flask, request, send_file, jsonify, render_template
@@ -11,7 +11,7 @@ ALLOWED_EXTENSIONS = set(['js', 'json', 'geojson'])
 app = Flask(__name__)
 
 def allowed_file(filename):
-  return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+  return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def get_centroids(polygons_json):
 
@@ -40,21 +40,21 @@ def operation():
       file_type = filename.rsplit('.', 1)[1]
       file_title = filename.rsplit('.', 1)[0]
 
-      polygons_json = file.read()
+      polygons_json = file.read().decode('utf-8')
       
-      strIO = StringIO.StringIO()
-      strIO.write(json.dumps(get_centroids(polygons_json)))
-      strIO.seek(0)
+      byte_stream = BytesIO()
+      byte_stream.write(json.dumps(get_centroids(polygons_json)).encode('utf-8'))
+      byte_stream.seek(0)
 
       centroids_filename = file_title + "_centroids.geojson"
 
-      return send_file(strIO, attachment_filename=centroids_filename, as_attachment=True)
+      return send_file(byte_stream, download_name=centroids_filename, as_attachment=True)
 
   return render_template('index.html')
 
 @app.route('/centroids', methods=['POST'])
 def api_centroids():
-  return jsonify(get_centroids(request.data))
+  return jsonify(get_centroids(request.get_data(as_text=True)))
 
 if __name__ == '__main__':
     app.run(debug=True)
