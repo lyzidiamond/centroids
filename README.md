@@ -1,110 +1,81 @@
 Centroids!
 ==========
 
-This application reads a valid geojson FeatureCollection and returns a valid geojson FeatureColleciton of centroids.
+This application reads a valid GeoJSON `FeatureCollection` and returns a valid GeoJSON `FeatureCollection` of centroids.
 
 In the output:
 
 * All properties are retained.
-* Polygon features become points that represent the Polygon's centroid.
+* Polygon features become points that represent the polygon's centroid.
 * LineString features become points that represent the middle of the LineString.
 * Point features do not change.
-* I have no idea how this handles MultiPolygons.
+* MultiPolygon handling depends on Shapely centroid behavior.
 
-This is a [Flask](http://flask.pocoo.org/) application that uses the [Shapely](https://github.com/Toblerity/Shapely) Python library by [@sgillies](http://github.com/sgillies). Issues and pull requests welcome!
-
+This is a Flask application that uses the Shapely Python library.
 The service can be accessed in two ways: an upload/download page and a web service.
-
-## Upload/download
-
-The upload/download page can be found [here](http://centroids.herokuapp.com). It is pretty self explanatory.
 
 ## Web service
 
-The web service lives at http://centroids.herokuapp.com/centroids. You can post to it with geojson.
+POST GeoJSON to `/centroids`.
 
-Here is an example of how you might do that from the command line with `curl` (example from [@invisiblefunnel](http://github.com/invisiblefunnel)):
+Example:
 
-    $ curl -X POST -H "Content-Type: application/json" -d \
-     '{
-       "type": "FeatureCollection",
-       "features": [
-         {
-           "type": "Feature",
-           "properties": {},
-           "geometry": {
-             "type": "Polygon",
-             "coordinates": [
-               [
-                 [
-                   -80.93490600585938,
-                   35.263561862152095
-                 ],
-                 [
-                   -80.69320678710938,
-                   35.32745068492882
-                 ],
-                 [
-                   -80.60531616210938,
-                   35.14124815600257
-                 ],
-                 [
-                   -80.83328247070312,
-                   35.06597313798418
-                 ],
-                 [
-                   -80.93490600585938,
-                   35.263561862152095
-                 ]
-               ]
-             ]
-           }
-         }
-       ]
-     }' http://centroids.herokuapp.com/centroids
-     
-Should return:
-
+```bash
+curl -X POST -H "Content-Type: application/json" -d \
+'{
+  "type": "FeatureCollection",
+  "features": [
     {
-      "features": [
-        {
-          "geometry": {
-            "coordinates": [
-              -80.76829071683488, 
-              35.199632857787904
-            ], 
-            "type": "Point"
-          }, 
-          "properties": {}, 
-          "type": "Feature"
-        }
-      ], 
-      "type": "FeatureCollection"
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-80.93490600585938, 35.263561862152095],
+          [-80.69320678710938, 35.32745068492882],
+          [-80.60531616210938, 35.14124815600257],
+          [-80.83328247070312, 35.06597313798418],
+          [-80.93490600585938, 35.263561862152095]
+        ]]
+      }
     }
-
-## Running locally
-
-Optionally create a [virtual environment](http://docs.python-guide.org/en/latest/dev/virtualenvs/)
-
-```
-virtualenv venv
-source venv/bin/activate
+  ]
+}' http://127.0.0.1:5000/centroids
 ```
 
-Install [requirements](https://devcenter.heroku.com/articles/python-pip)
+## Running locally (Python 3)
 
+Create and activate a virtual environment:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
 ```
+
+Install dependencies:
+
+```bash
 pip install -r requirements.txt
 ```
 
-Start the server
+Run locally:
 
+```bash
+python runserver.py
 ```
-python hello.py
-```
 
-You should now be able to visit the application at http://127.0.0.1:5000/.
+Then open http://127.0.0.1:5000/.
 
-## Notes
+## Deploying on Render
 
-To run on Heroku requires a third party `BUILDPACK` for Heroku
+This repo includes `render.yaml` for Blueprint deploys.
+
+1. Push this repo to GitHub.
+2. In Render, click **New +** → **Blueprint**.
+3. Connect the repo and deploy.
+
+Render will:
+
+* install dependencies with `pip install -r requirements.txt`
+* run the app with `gunicorn hello:app`
+* use Python `3.12.2`
