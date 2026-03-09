@@ -1,4 +1,4 @@
-Centroids!
+Centroids as a Service
 ==========
 
 This application reads a valid GeoJSON `FeatureCollection` and returns a valid GeoJSON `FeatureCollection` of centroids.
@@ -11,8 +11,19 @@ In the output:
 * Point features do not change.
 * MultiPolygon handling depends on Shapely centroid behavior.
 
-This is a Flask application that uses the Shapely Python library.
+This is a [Flask](https://flask.palletsprojects.com/en/stable/) application that uses the [Shapely](https://shapely.readthedocs.io/en/stable/) Python library.
 The service can be accessed in two ways: an upload/download page and a web service.
+The application is currently [deployed to Render](https://centroids.onrender.com).
+
+## Why would anyone use this?
+
+I originally wrote this app in 2014 as a way to understand how to write a Flask app and deploy it to Heroku. I didn't touch it again until 2026, when I modernized the app to current conventions and redeployed it to Render (RIP Heroku, I'll miss you forever, bless you Render, I'm enjoying using you). I'm once again using this as a practice project to understand how to build and deploy apps in 2026.
+
+In 2014, I found this app useful to create labels for polygons. (Of course, sometimes the centroid falls outside of the polygon and you have to adjust it -- there are other geospatial operations that can guarantee the point ends up inside the bounds of the polygon.) Nowadays, labeling engines are far more robust and helpful than they were 12 years ago, so this use case isn't as applicable.
+
+The ultimate use case for centroids is _simplification_. You can calculate the rough distance between two cities by using the centroids as reference points. You can use centroids as a tool for certain clustering algorithms, like K-means.
+
+This app is also pretty straightforward with minimal code. It would require few steps to change it to use a different operation. What a great way to explore Shapely!
 
 ## Web service
 
@@ -40,7 +51,7 @@ curl -X POST -H "Content-Type: application/json" -d \
       }
     }
   ]
-}' http://127.0.0.1:5000/centroids
+}' https://centroids.onrender.com/centroids
 ```
 
 ## Running locally (Python 3)

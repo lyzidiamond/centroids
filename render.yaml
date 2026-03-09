@@ -3,7 +3,7 @@ services:
     plan: free
     name: centroids
     runtime: python
-    repo: https://githu.com/lyzidiamond/centroids.git
+    repo: https://github.com/lyzidiamond/centroids.git
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn hello:app
     envVars:

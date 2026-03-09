@@ -5,6 +5,7 @@ import shapely
 from shapely.geometry import shape, mapping
 from flask import Flask, request, send_file, jsonify, render_template
 from werkzeug.utils import secure_filename
+import requests
 
 ALLOWED_EXTENSIONS = set(['js', 'json', 'geojson'])
 
@@ -56,5 +57,13 @@ def operation():
 def api_centroids():
   return jsonify(get_centroids(request.get_data(as_text=True)))
 
+@app.route('/dc-and-utah-20m.json')
+def download_file():
+  url = 'https://raw.githubusercontent.com/lyzidiamond/centroids/main/examples/dc-and-utah-20m.json'
+  filename = 'dc-and-utah-20m.json'
+  response = requests.get(url)
+  with open(filename, 'wb') as f:
+      f.write(response.content)
+  return send_file(filename, download_name=filename, as_attachment=True)
 if __name__ == '__main__':
     app.run(debug=True)
