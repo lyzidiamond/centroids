@@ -51,7 +51,7 @@ def operation():
 
       return send_file(byte_stream, download_name=centroids_filename, as_attachment=True)
 
-  return render_template('index.html')
+  return render_template('index.html', map=True)
 
 @app.route('/centroids', methods=['POST'])
 def api_centroids():
