@@ -35,7 +35,7 @@
     <a href="/dc-and-utah-20m.json"><button>Download example file</button></a>
   </div>
   <div id="footer">
-    <p>This is a Flask application that uses the <a href="https://pypi.python.org/pypi/Shapely">Shapely</a> Python library. It was made by <a href="http://twitter.com/lyzidiamond">Lyzi Diamond</a>. <a href="http://github.com/lyzidiamond/centroids">It is on GitHub. Example data is a subset of the US States 20m GeoJSON file from [Eric Celeste's website](https://eric.clst.org/tech/usgeojson/), derived from [US Census Bureau Cartographic Boundary Files](https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html)</a></p>
+    <p>This is a Flask application that uses the <a href="https://pypi.python.org/pypi/Shapely">Shapely</a> Python library. It was made by <a href="http://twitter.com/lyzidiamond">Lyzi Diamond</a>. <a href="http://github.com/lyzidiamond/centroids">It is on GitHub</a>. Example data is a subset of the US States 20m GeoJSON file from <a href="https://eric.clst.org/tech/usgeojson/">Eric Celeste's website</a>, derived from <a href="https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.html">US Census Bureau Cartographic Boundary Files</a>.</p>
     {% if map %}
       <div id="map" style="height:500px; width:50%;"></div>
       <script src="{{ url_for('static', filename='js/map.js') }}"></script>
