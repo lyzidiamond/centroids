@@ -1,6 +1,6 @@
 services:
   - type: web
-    plan: free
+    plan: starter
     name: centroids
     runtime: python
     repo: https://github.com/lyzidiamond/centroids.git
